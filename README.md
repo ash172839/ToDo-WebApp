@@ -5,10 +5,10 @@ A clean, modern, feature-rich **To-Do & Task Manager Web App** built using vanil
 ![App Screenshot]
 
 ### 🏠 Home Page
-![Home Screenshot](assets/Home.jng)
+![Home Screenshot](Assets/Home.jng)
 
 ### ➕ Add Task Preview
-![Add Task](assets/task-with-image.png)
+![Add Task](Assets/task-with-image.png)
 
 ## 🚀 Features
 
@@ -85,4 +85,5 @@ That’s it! Now tasks will trigger remote messages when saved.
  Drag-and-drop task reordering
 
  ❤️ Author
+ 
 Made with care by Ashish Singh
