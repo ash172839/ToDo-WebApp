@@ -1,10 +1,10 @@
-import {
-    doAjax
-} from '../data/services/ajax.js';
-import {
-    Task_Operations
-} from '../data/services/task-operations.js';
+import { doAjax } from '../data/services/ajax.js';
+import { Task_Operations } from '../data/services/task-operations.js';
+
 window.addEventListener('load', init)
+
+import { RegexValidator } from '../utils/regex-validator.js';
+
 
 function bindEvents() {
     document.getElementById("add").addEventListener('click', addTask);
@@ -12,6 +12,7 @@ function bindEvents() {
     document.getElementById("save").addEventListener('click', save);
     document.getElementById("load").addEventListener('click', load);
     document.getElementById("update").addEventListener('click', update);
+    document.getElementById("search").addEventListener('click', searchTask);
     document.getElementById("clear-all").addEventListener('click', clearAll);
     document.getElementById("load-from-server").addEventListener('click', loadFromServer);
 }
@@ -105,7 +106,17 @@ function addTask() {
     const taskObject = {};
     for (let field of fields) {
         let fieldValue = document.querySelector(`#${field}`).value;
+        const isValid = RegexValidator.validate(field, fieldValue);
+        if (!isValid) {
+            alert(`Invalid ${field} format.`);
+            return;
+        }
         taskObject[field] = fieldValue;
+    }
+    const isDuplicate = Task_Operations.tasks.some(task => task.id === taskObject.id);
+    if (isDuplicate) {
+        alert(`Task with ID ${taskObject.id} already exists.`);
+        return;
     }
     Task_Operations.add(taskObject);
     printTask(taskObject);
@@ -196,6 +207,24 @@ function showCount() {
     document.querySelector('#mark').innerText = Task_Operations.getMark();
     document.querySelector('#unmark').innerText = Task_Operations.getUnMark();
 }
+
+function searchTask() {
+    const id = document.querySelector('#id').value.trim();
+
+    if (!RegexValidator.validate('id', id)) {
+        alert("Invalid ID format.");
+        return;
+    }
+
+    const task = Task_Operations.search(id);
+    if (task) {
+        printTaskTable([task]); // show only the searched task
+        showCount();
+    } else {
+        alert("No task found with this ID.");
+    }
+}
+
 
 function sendToAutoRemote(timestamp, name, desc) {
     const key = "dUhPcPb434U:APA91bHHstp8JCxbapDuOnNVhbVNiUjYxQgR_gg5_PSWvSnaYZX9oF_DvcRgT9g10j5NzCjOO2rTLH1VTf1yajzwEYpBIrkRcGxpXPnNhhEI3baeOMFNva4";
