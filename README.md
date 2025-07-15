@@ -2,7 +2,12 @@
 
 A clean, modern, feature-rich **To-Do & Task Manager Web App** built using vanilla JavaScript, HTML5, CSS3, and Bootstrap — with advanced functionalities like **calendar-based scheduling**, **AutoRemote integration**, **local storage saving**, and a **responsive animated UI**.
 
-![App Screenshot]
+A clean, modern, feature-rich To-Do & Task Manager Web App built using only JavaScript — no frameworks, no libraries.
+
+🧠 Even the HTML structure is dynamically created with JavaScript, making this a fully JS-driven application from logic to UI.
+
+
+## Screenshot
 
 ### 🏠 Home Page
 
