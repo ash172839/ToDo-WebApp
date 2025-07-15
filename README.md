@@ -7,7 +7,7 @@ A clean, modern, feature-rich To-Do & Task Manager Web App built using only Java
 🧠 Even the HTML structure is dynamically created with JavaScript, making this a fully JS-driven application from logic to UI.
 
 
-## Screenshot
+## Screenshots
 
 ### 🏠 Home Page
 
