@@ -84,6 +84,7 @@ That’s it! Now tasks will trigger remote messages when saved.
 
  Drag-and-drop task reordering
 
- ❤️ Author
+ 
+ ## ❤️ Author
  
 Made with care by Ashish Singh
