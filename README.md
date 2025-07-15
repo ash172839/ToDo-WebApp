@@ -5,7 +5,7 @@ A clean, modern, feature-rich **To-Do & Task Manager Web App** built using vanil
 ![App Screenshot]
 
 ### 🏠 Home Page
-![Home Screenshot](Assets/Home.jpg)
+![Home Screenshot]<img src="assets/Home.jpg" width="150" />
 
 ### ➕ Add Task Preview
 ![Add Task](Assets/task-with-image.png)
