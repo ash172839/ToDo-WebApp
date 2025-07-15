@@ -4,6 +4,7 @@ import { Task_Operations } from '../data/services/task-operations.js';
 window.addEventListener('load', init)
 
 import { RegexValidator } from '../utils/regex-validator.js';
+import Task from "../data/models/task.js";
 
 
 function bindEvents() {
@@ -63,7 +64,7 @@ function save() {
             const dateValue = taskObject['date'];
             const timeValue = taskObject['time'];
 
-            if (dateValue && timeValue) {
+            if (dateValue && timeValue && !taskObject.isSentToAutoRemote) {
                 const dateTimeString = `${dateValue}T${timeValue}:00`;
                 const timestamp = Math.floor(new Date(dateTimeString).getTime() / 1000);
 
@@ -71,6 +72,7 @@ function save() {
                 const taskDesc = taskObject['desc'];
 
                 sendToAutoRemote(timestamp, taskName, taskDesc);
+                taskObject.isSentToAutoRemote = true;
             }
         }
         alert("Data Saved Successfully...");
@@ -83,7 +85,13 @@ function load() {
     if (window.localStorage) {
         if (localStorage.tasks) {
             const tasks = JSON.parse(localStorage.tasks);
-            printTaskTable(tasks);
+            Task_Operations.tasks = tasks.map(obj => {
+                const task = new Task(obj.id, obj.name, obj.desc, obj.date, obj.time, obj.url);
+                task.isMarked = obj.isMarked; // preserve marked state
+                task.isSentToAutoRemote = obj.isSentToAutoRemote || false;
+                return task;
+            });
+            printTaskTable(Task_Operations.tasks);
             showCount();
         } else {
             alert("You Don't have any previous Tasks");
@@ -149,7 +157,7 @@ function edit() {
 
 function removeTask() {
     const tasks = Task_Operations.delete();
-    printTaskTable(tasks);
+    printTaskTable(Task_Operations.tasks);
     showCount();
 }
 

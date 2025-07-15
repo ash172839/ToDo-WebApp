@@ -7,6 +7,7 @@ class Task{
         this.time=time;
         this.url=url;
         this.isMarked=false;
+        this.isSentToAutoRemote = false;
     }
     toggle(){
         this.isMarked=!this.isMarked;
